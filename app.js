@@ -10,14 +10,17 @@ mongoose.connect("mongodb://admin:password@ds038547.mlab.com:38547/ninjas-api",{
 
 mongoose.Promise = global.Promise;
 
+// static files
+app.use(express.static('public'));
+
 // api
 app.use(bodyParser.json());
 app.use('/api', require('./routes/api'));
+
 //error handler
 app.use(function (err, req, res, next) {
     res.status(422).send({
         error: err.message,
-        // message: err.errors.name.message
     });
 });
 
